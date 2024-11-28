@@ -3,7 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use App\Models\WalletOwner;
+use App\Models\Wallet;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\HistoricTransfer>
  */
@@ -18,8 +18,9 @@ class HistoricTransferFactory extends Factory
     {
         return [
             'amount'=> $this->faker->numberBetween(100, 10000),
-            'from_wallet_id'=> WalletOwner::factory()->create()->id,
-            'to_wallet_id'=>WalletOwner::factory()->create()->id,
+            'from_wallet_id'=> Wallet::inRandomOrder()->first()->id,
+            'to_wallet_id'=>Wallet::inRandomOrder()->first()->id,
+            'system_manager_id' =>1,
         ];
     }
 }
