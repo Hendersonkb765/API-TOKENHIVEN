@@ -19,6 +19,8 @@ class WalletOwnerFactory extends Factory
         return [
             'name' => $this->faker->name(),
             'email' => $this->faker->unique()->safeEmail(),
+            'system_manager_id' =>1,
+            
         ];
     }
 }
