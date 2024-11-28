@@ -32,6 +32,8 @@ class DatabaseSeeder extends Seeder
 
         */
         User::factory()->create();
-        HistoricTransfer::factory()->create();
+        WalletOwner::factory(5)->create();
+        Wallet::factory(5)->create();
+        HistoricTransfer::factory(10)->create();
     }
 }
