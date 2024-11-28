@@ -21,4 +21,5 @@ class Wallet extends Model
     {
         return $this->belongsTo(WalletOwner::class);
     }
+
 }
