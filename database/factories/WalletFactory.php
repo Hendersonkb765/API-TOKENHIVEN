@@ -17,10 +17,10 @@ class WalletFactory extends Factory
     public function definition(): array
     {
         return [
-            'wallet_address' => $this->faker->hash('sha256'),
+            'wallet_address' => $this->faker->sha256,
             'amount' => $this->faker->numberBetween(100, 10000),
-            'currency' => $this->faker->randomElement(['USD', 'EUR', 'GBP']),
-            'owner_id' => \App\Models\WalletOwner::factory()->create()->id,
+            'owner_id' => \App\Models\WalletOwner::inRandomOrder()->first()->id,
+            'system_manager_id' =>1,
         ];
     }
 }
