@@ -8,11 +8,8 @@ use App\Http\Controllers\Api\V1\WalletTransferController;
 Route::prefix('v1')->group(function(){
   
     //Route::get('/wallets',[WalletOwnerController::class,'index']);
-    Route::apiResources([
-        'walletsowner' => WalletOwnerController::class,
-
-    ]);
-    Route::get('wallet',[WalletController::class,'index']);
+    Route::apiResource('walletsowner', WalletOwnerController::class)->middleware('auth:sanctum');
+    Route::get('wallet',[WalletController::class,'index'])->middleware('auth:sanctum');
     Route::post('wallet',[WalletController::class,'store']);
     Route::delete('wallet/{wallet}',[WalletController::class,'destroy']);
 
