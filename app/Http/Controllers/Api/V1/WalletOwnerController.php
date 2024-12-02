@@ -38,7 +38,7 @@ class WalletOwnerController extends Controller
             return $this->error('An error occurred while trying to get the user list',500);
         }
         catch(\Exception $e){
-            Log::error('Error:'.$e->getMessage());
+            Log::error('Error:'.$e->getMessage(). 'trace'.$e->getTraceAsString());
             return $this->error('An unexpected error occurred. Please contact support if the problem persists.',500);
         }
         
@@ -58,8 +58,8 @@ class WalletOwnerController extends Controller
             return $this->error('Error co',500);
        }
        catch(\Exception $e){
-            Log::error('Error:'.$e->getMessage());
-            return $this->error('An unexpected error occurred. Please contact support if the problem persists.',500);
+        Log::error('Error:'.$e->getMessage(). 'trace'.$e->getTraceAsString());
+        return $this->error('An unexpected error occurred. Please contact support if the problem persists.',500);
        }
         
   
@@ -79,7 +79,8 @@ class WalletOwnerController extends Controller
             return $this->error('An error occurred while trying to get a user',500);
        }
         catch(\Exception $e){
-            Log::error('Error:'.$e->getMessage());
+
+            Log::error('Error:'.$e->getMessage(). 'trace'.$e->getTraceAsString());
             return $this->error('An unexpected error occurred. Please contact support if the problem persists.',500);
         }
     }
@@ -119,10 +120,14 @@ class WalletOwnerController extends Controller
         }
         catch(\QueryException $e)
         {
+            Log::error('Error QueryException:'.$e->getMessage());
+
             return $this->error('Error deleting user',500);
 
         }
         catch(\Exception $e){
+            Log::error('Error:'.$e->getMessage(). 'trace'.$e->getTraceAsString());
+
             return $this->error('An unexpected error occurred. Please contact support if the problem persists.',500);
         }
         
