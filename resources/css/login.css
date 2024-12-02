@@ -1,0 +1,19 @@
+.container-form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(to right, #6a8e3b, #e8da5e);
+
+};
+h1{
+    text-align: center;
+    background-color: #000000;
+    
+}
+form{
+    padding: 50px;
+    border-radius: 30px;
+    backdrop-filter: blur(1300px);
+    box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.5);
+}

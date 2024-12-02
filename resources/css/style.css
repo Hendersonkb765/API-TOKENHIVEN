@@ -1,0 +1,41 @@
+:root {
+    --font-primary:white;
+    --bg-gradient:linear-gradient(to right, #6a8e3b, #e8da5e);
+}
+.logo{
+    width: 50px;
+}
+
+.container-nav{
+    background-color: #92b55f;
+    
+    background: var(--bg-gradient);
+}
+
+.bg-color-primary{
+    background-color: #e8da5e;
+}
+.btn-login:hover{
+    font-weight: bold;
+}
+
+.text-bold{
+    font-weight: bold;
+}
+
+.btn-login{
+    font-weight: bold;
+    font-style: none;
+    color: black;
+    cursor: pointer;
+}
+
+@media only screen and (max-width: 991px) {
+    
+ 
+  
+    .container-nav{
+        display: flex;
+        
+    }
+}
