@@ -12,15 +12,25 @@ use Illuminate\Validation\ValidationException;
 use App\Http\Requests\UpdateWalletOwnerRequest;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
+use Laravel\Sanctum\PersonalAccessToken;
+use App\Exceptions\TokenNotFoundException;
+use App\Repositories\BaseRepository;
+use App\Services\V1\TokenUserResolverService;
 class WalletOwnerController extends Controller
 {
     use HttpResponses;
-    public function index()
+
+
+    public function index(Request $request)
     {
         try{
 
-            $walletOwners = WalletOwner::with('wallet')->get();
+            //$walletOwners = WalletOwner::with('wallet')->get();
+            $userId = (new TokenUserResolverService())->getUser($request)->id;
+            $walletOwners = (new BaseRepository(new WalletOwner(),$userId))->all();
             return $this->success('ok',200,WalletOwnerResource::collection($walletOwners));
+
 
         }
         catch (\QueryException $e){
@@ -37,13 +47,10 @@ class WalletOwnerController extends Controller
     public function store(StoreWalletOwnerRequest $request)
     {
        try{
-            $validated = $request->validated();
-            $walletOwner = WalletOwner::create([
-                'name' => $validated['name'],
-                'email' => $validated['email'],
-                'system_manager_id'=> 1
-            ]);     
             
+           // $walletOwner = (new WalletOwnerService())->createWalletOwner($request);
+            $userId = (new TokenUserResolverService())->getUser($request)->id;
+            $walletOwner = (new BaseRepository(new WalletOwner(),$userId))->create($request->validated());
             return $this->success('User created successfully',201, new WalletOwnerResource($walletOwner));               
        }
        catch (\QueryException $e){
@@ -60,10 +67,12 @@ class WalletOwnerController extends Controller
     }
 
     
-    public function show(WalletOwnerResource $walletsowner)
+    public function show(Request $request, WalletOwner $walletsowner)
     {
         try{
-            return $this->success(200,$walletOwner);
+            $userId = (new TokenUserResolverService())->getUser($request)->id;
+            $walletOwners = (new BaseRepository(new WalletOwner(),$userId))->show($walletsowner);
+            return $this->success('ok',200,new WalletOwnerResource($walletOwners));
         }
         catch (\QueryException $e){
             Log::error('Error QueryException:'.$e->getMessage());
@@ -79,11 +88,10 @@ class WalletOwnerController extends Controller
     public function update(UpdateWalletOwnerRequest $request, WalletOwner $walletsowner)
     {
         try{
+            $userId = (new TokenUserResolverService())->getUser($request)->id;
             $request = $request->validated();
-            
-            $updated = $walletsowner->update($request);
-    
-            return $this->success('User updated successfully',200, new WalletOwnerResource($walletsowner));
+            (new BaseRepository(new WalletOwner(),$userId))->update($request,$walletsowner); //$walletsowner->update($request);
+            return $this->success('User updated successfully',200, new WalletOwnerResource($walletsowner->refresh()));
             
         }
         catch(\QueryException $e)
@@ -101,10 +109,11 @@ class WalletOwnerController extends Controller
     }
 
    
-    public function destroy(WalletOwner $walletsowner)
+    public function destroy(Request $request ,WalletOwner $walletsowner)
     {
         try{
-            $deleted = $walletsowner->delete();
+            $userId = (new TokenUserResolverService())->getUser($request)->id;
+            (new BaseRepository(new WalletOwner(),$userId))->delete($walletsowner);
             
             return $this->success('User deleted successfully',200);
         }
