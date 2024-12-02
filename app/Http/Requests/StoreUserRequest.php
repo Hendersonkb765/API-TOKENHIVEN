@@ -24,13 +24,8 @@ class StoreUserRequest extends FormRequest
         return [
             'name'=>'required|string',
             'email'=>'required|email|unique:users,email',
-            'password'=>'required|string|min:8|password'
+            'password'=>'required|string|min:8'
         ];
     }
-    protected function failedValidation(Validator $validator)
-    {
-        $errors = $validator->errors();
-
-        throw new HttpResponseException($this->error('Validation error', 422, $errors));
-    }
+  
 }
