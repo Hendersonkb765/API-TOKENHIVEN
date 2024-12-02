@@ -14,12 +14,13 @@ class WalletOwnerResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        \Log::info('wallet:',['wallet'=>$this->wallet]);
         return [
             'id' => $this->id,
             'name' => $this->name,
             'email' => $this->email,
             'walletBalance' =>empty($this->wallet->amount)?null : $this->wallet->amount,
+            'createdAt' => $this->created_at->format('d/m/Y H:i:s'),
+            'updatedAt' => $this->updated_at->format('d/m/Y H:i:s'),
         ];
     }
 }
