@@ -27,7 +27,7 @@ class WalletTransferController extends Controller
     public function index(){
         
         $historicTransfer = WalletTransferResource::collection(HistoricTransfer::all());
-        return $this->success('ok',200,['wallets'=>$historicTransfer]);
+        return $this->success('ok',200,['transferHistory'=>$historicTransfer]);
     }
     public function store(WalletTransferRequest $request){
 
