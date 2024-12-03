@@ -2,9 +2,10 @@
 
 namespace App\Interfaces;
 use Illuminate\Database\Eloquent\Model;
+use App\Filters\Filter;
 interface BaseRepositoryInterface
 {
-    public function all();
+    public function all(array $queryfilter);
 
     public function update(array $data,Model $model);
 
