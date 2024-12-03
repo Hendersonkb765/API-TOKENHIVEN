@@ -17,6 +17,7 @@ use Laravel\Sanctum\PersonalAccessToken;
 use App\Exceptions\TokenNotFoundException;
 use App\Repositories\BaseRepository;
 use App\Services\V1\TokenUserResolverService;
+use App\Filters\WalletOwnerFilter;
 class WalletOwnerController extends Controller
 {
     use HttpResponses;
@@ -25,10 +26,11 @@ class WalletOwnerController extends Controller
     public function index(Request $request)
     {
         try{
-
-            //$walletOwners = WalletOwner::with('wallet')->get();
+            
+            $queryFilter = (new WalletOwnerFilter())->filter($request);
             $userId = (new TokenUserResolverService())->getUser($request)->id;
-            $walletOwners = (new BaseRepository(new WalletOwner(),$userId))->all();
+            $walletOwners = (new BaseRepository(new WalletOwner(),$userId))->all($queryFilter);
+            
             return $this->success('ok',200,WalletOwnerResource::collection($walletOwners));
 
 
