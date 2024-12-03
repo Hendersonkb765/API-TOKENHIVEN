@@ -19,9 +19,7 @@ class WalletOwner extends Model
         return $this->hasOne(Wallet::class, 'owner_id');
     }
 
-    public function scopeAllFiltered($query, Request $request){
-        $user  =(new TokenUserResolverService())->getUser($request);
-        return $user;
+    public function filter($query, Request $request){
     }
    
 }
