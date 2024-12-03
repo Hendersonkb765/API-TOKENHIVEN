@@ -3,6 +3,8 @@ namespace App\Repositories;
 
 use App\Interfaces\BaseRepositoryInterface;
 use Illuminate\Database\Eloquent\Model;
+use App\Filters\Filter;
+use Illuminate\Database\Eloquent\Builder;
 class BaseRepository implements BaseRepositoryInterface{
 
     protected $model;
@@ -12,9 +14,20 @@ class BaseRepository implements BaseRepositoryInterface{
         $this->userId = $userId;
         $this->model = $model;
     }
-    public function all(){
-        $model = $this->model->where('system_manager_id',$this->userId)->get();
-        return $model;
+    public function all(array $queryfilter){
+
+        if(empty($queryfilter)){
+            return $this->model->all();
+        }
+        if(!empty($queryfilter['whereIn'])){
+            foreach ($queryfilter['whereIn'] as $where){
+                $this->model = $this->model->whereIn($where[0],$where[1]);
+            }
+        }
+        
+        $resouce = $this->model->where($queryfilter['where'])->get();
+
+        return $resouce;
     }
     public function create(array $data){
         $data['system_manager_id'] = $this->userId;
