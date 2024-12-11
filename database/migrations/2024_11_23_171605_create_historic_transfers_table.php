@@ -14,8 +14,10 @@ return new class extends Migration
         Schema::create('historic_transfers', function (Blueprint $table) {
             $table->id();
             $table->float('amount');
-            $table->foreignId('from_wallet_id')->constrained('wallets');
-            $table->foreignId('to_wallet_id')->constrained('wallets');
+            $table->unsignedBigInteger('from_wallet_id')->nullable();
+            $table->string('from_wallet_owner_name');
+            $table->unsignedBigInteger('to_wallet_id')->nullable();
+            $table->string('to_wallet_owner_name');
             $table->foreignId('system_manager_id')->constrained('users');
             $table->timestamps();
         });
