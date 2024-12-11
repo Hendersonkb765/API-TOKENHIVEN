@@ -15,4 +15,3 @@ Route::post('/users',[UserController::class,'store'])->name('users.store');
 Route::post('/access-tokens',[AccessTokenController::class,'store'])->name('accessTokens.store');
 Route::get('/access-tokens',[AccessTokenController::class,'index'])->name('accessTokens.index');
 */
-
