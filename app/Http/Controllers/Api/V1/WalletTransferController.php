@@ -9,10 +9,14 @@ use App\Models\WalletOwner;
 use App\Traits\HttpResponses;
 use App\Http\Requests\WalletTransferRequest;
 use Illuminate\Support\Facades\DB;
-use App\Services\WalletTransferService;
+use App\Services\V1\WalletTransferService;
 use Illuminate\Support\Facades\Log;
 use App\Models\HistoricTransfer;
 use App\Http\Resources\V1\WalletTransferResource;
+use App\Services\V1\TokenUserResolverService;
+use App\Filters\HistoricTransferFilter;
+use App\Repositories\BaseRepository;
+
 
 class WalletTransferController extends Controller
 {
@@ -24,18 +28,25 @@ class WalletTransferController extends Controller
         $this->walletTransferService = new WalletTransferService;    
     }
 
-    public function index(){
-        
-        $historicTransfer = WalletTransferResource::collection(HistoricTransfer::all());
-        return $this->success('ok',200,['transferHistory'=>$historicTransfer]);
+    public function index(Request $request){
+   
+        $queryFilter = (new HistoricTransferFilter())->filter($request);
+        $userId = (new TokenUserResolverService())->getUser($request)->id;
+        $historicTransfer = (new BaseRepository(new HistoricTransfer(),$userId))->all($queryFilter);
+
+        return $this->success('ok',200,
+        [
+            'transferHistory'=>WalletTransferResource::collection($historicTransfer)
+        ]);
     }
     public function store(WalletTransferRequest $request){
 
         try{
-
-            Db::beginTransaction();
-            $request = $request->validated();
-            $this->walletTransferService->transfer($request['from'],$request['to'],$request['amount']);
+            DB::beginTransaction();
+            $userId = (new TokenUserResolverService)->getUser($request)->id;
+            $request = $request->validated();          
+            $this->walletTransferService->transfer($request['from'],$request['to'],$request['amount'],$userId);
+            
             DB::commit();
             return $this->success('Transfer successful',200);
     
@@ -51,4 +62,5 @@ class WalletTransferController extends Controller
             return $this->error('An error occurred:'.$e->getMessage(), 500);
         }
     }
+ 
 }
