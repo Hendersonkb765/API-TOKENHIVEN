@@ -10,7 +10,7 @@ use App\Services\V1\TokenUserResolverService;
 class WalletOwner extends Model
 {
     /** @use HasFactory<\Database\Factories\WalletOwnerFactory> */
-    use HasFactory;
+    use HasFactory ;
 
     protected $fillable = ['name', 'email', 'system_manager_id'];
 
@@ -19,7 +19,5 @@ class WalletOwner extends Model
         return $this->hasOne(Wallet::class, 'owner_id');
     }
 
-    public function filter($query, Request $request){
-    }
    
 }
