@@ -15,6 +15,8 @@ class HistoricTransfer extends Model
         'to_wallet_id',
         'amount',
         'system_manager_id',
+        'from_wallet_owner_name',
+        'to_wallet_owner_name'
     ];
 
     public function fromWallet(){
