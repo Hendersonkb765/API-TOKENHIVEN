@@ -21,9 +21,16 @@ class StoreWalletRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'owner_id'=>'required|integer',
+            'ownerId'=>'required|integer|exists:wallet_owners,id',
+            'amount'=>'numeric'
         ];
     }
+    public function messages(){
+        return [
+            'owner_id.exists'=> 'There is no wallet owner with the given owner_id in the database'
+        ];
+    }
+
     protected function failedValidation(Validator $validator)
     {
         $errors = $validator->errors();
