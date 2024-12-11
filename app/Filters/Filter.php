@@ -2,6 +2,7 @@
 
 namespace App\Filters;
 use Illuminate\Http\Request;
+use Exception;
 abstract class Filter{
     protected array $allowedOperatorsFields = [];
 
