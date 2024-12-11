@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Wallet extends Model
 {
     /** @use HasFactory<\Database\Factories\WalletFactory> */
-    use HasFactory;
+    use HasFactory ;
 
     protected $fillable = [
         'wallet_address',
@@ -21,5 +21,6 @@ class Wallet extends Model
     {
         return $this->belongsTo(WalletOwner::class);
     }
+   
 
 }
