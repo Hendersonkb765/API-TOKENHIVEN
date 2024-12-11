@@ -1,10 +1,14 @@
 <?php 
 
-namespace App\Services;
+namespace App\Services\V1;
 use App\Models\Wallet;
+use App\Services\V1\TokenUserResolverService;
+use App\Services\V1\TransactionHistoryService;
+use App\Models\HistoricTransfer;
+use App\Repositories\BaseRepository;
 class WalletTransferService extends TransactionHistoryService{
 
-    public function transfer(string $from, string $to, float|int $amount){
+    public function transfer(string $from, string $to, float|int $amount, int $userId){
 
         
         $from = Wallet::where('wallet_address',$from)->first();
@@ -13,7 +17,16 @@ class WalletTransferService extends TransactionHistoryService{
         $to->amount += $amount;
         $from->save();
         $to->save();
-        $this->recordTransaction($from->id,$to->id,$amount);
+        
+        (new BaseRepository(new HistoricTransfer(),$userId))->create([
+            'from_wallet_id' => $from->id,
+            'from_wallet_owner_name' => $from->owner->name,
+            'to_wallet_id' => $to->id,
+            'to_wallet_owner_name' => $to->owner->name,
+            'amount' => $amount,
+            'system_manager_id' => $userId
+        ]);
+
 
     }
 }

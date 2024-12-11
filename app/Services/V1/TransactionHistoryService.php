@@ -4,15 +4,16 @@ namespace App\Services\V1;
 
 use App\Models\Wallet;
 use App\Models\HistoricTransfer;
-abstract class TransactionHistoryServiceService{
+use App\Repositories\BaseRepository;
+use App\Services\V1\TokenUserResolverService;
+use Illuminate\Database\Eloquent\Model;
 
-    public function recordTransaction(int $from,int $to, float|int $amount){
+abstract class TransactionHistoryService{
 
-        HistoricTransfer::create([
-            'from_wallet_id' => $from,
-            'to_wallet_id' => $to,
-            'amount' => $amount,
-            'system_manager_id' => 1
-        ]);
+    public function recordTransaction(Model $from,Model $to, int $amount,int $userId){
+
+        
+  
+
     }
 }
