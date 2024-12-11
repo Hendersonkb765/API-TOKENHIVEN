@@ -22,6 +22,8 @@ class WalletOwnerService{
 
         return $walletOwner;
     }
+
+    
 }
 
 ?>

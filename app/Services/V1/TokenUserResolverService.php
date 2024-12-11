@@ -9,7 +9,7 @@ use App\Exceptions\TokenNotFoundException;
 class TokenUserResolverService{
 
     public function getUser(Request $request): User{
-        
+
         $authorizationHeader = $request->header('Authorization');
         $token = PersonalAccessToken::findToken(Str::after($authorizationHeader  , 'Bearer '));
         $user = $token->tokenable;

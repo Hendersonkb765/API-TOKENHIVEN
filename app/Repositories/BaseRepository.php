@@ -32,6 +32,7 @@ class BaseRepository implements BaseRepositoryInterface{
     public function create(array $data){
         $data['system_manager_id'] = $this->userId;
         $model = $this->model->create($data);
+
         if(empty($model)){
             return throw new \Exception('An error occurred while trying to create the user');
         }
