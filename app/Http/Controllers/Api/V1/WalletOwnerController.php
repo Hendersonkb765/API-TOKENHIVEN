@@ -18,6 +18,8 @@ use App\Exceptions\TokenNotFoundException;
 use App\Repositories\BaseRepository;
 use App\Services\V1\TokenUserResolverService;
 use App\Filters\WalletOwnerFilter;
+use App\Repositories\DeleteWalletOwnerRepository;
+
 class WalletOwnerController extends Controller
 {
     use HttpResponses;
@@ -50,9 +52,11 @@ class WalletOwnerController extends Controller
     {
        try{
             
-           // $walletOwner = (new WalletOwnerService())->createWalletOwner($request);
             $userId = (new TokenUserResolverService())->getUser($request)->id;
-            $walletOwner = (new BaseRepository(new WalletOwner(),$userId))->create($request->validated());
+            $request = $request->validated();
+            $walletOwner = (new BaseRepository(new WalletOwner,$userId))->create($request);
+
+            //walletOwner = (new BaseRepository(new WalletOwner(),$userId))->create($request->validated());
             return $this->success('User created successfully',201, new WalletOwnerResource($walletOwner));               
        }
        catch (\QueryException $e){
@@ -115,6 +119,7 @@ class WalletOwnerController extends Controller
     public function destroy(Request $request ,WalletOwner $walletsowner)
     {
         try{
+
             $userId = (new TokenUserResolverService())->getUser($request)->id;
             (new BaseRepository(new WalletOwner(),$userId))->delete($walletsowner);
             
@@ -123,7 +128,6 @@ class WalletOwnerController extends Controller
         catch(\QueryException $e)
         {
             Log::error('Error QueryException:'.$e->getMessage());
-
             return $this->error('Error deleting user',500);
 
         }
