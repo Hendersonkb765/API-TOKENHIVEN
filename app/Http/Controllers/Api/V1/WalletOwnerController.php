@@ -55,6 +55,11 @@ class WalletOwnerController extends Controller
             $userId = (new TokenUserResolverService())->getUser($request)->id;
             $request = $request->validated();
             $walletOwner = (new BaseRepository(new WalletOwner,$userId))->create($request);
+            $wallet = (new BaseRepository(new Wallet,$userId))->create([
+                'wallet_address'=>Hash::make(now()),
+                'amount'=>0,
+                'owner_id'=>$walletOwner->id,
+            ]);
 
             //walletOwner = (new BaseRepository(new WalletOwner(),$userId))->create($request->validated());
             return $this->success('User created successfully',201, new WalletOwnerResource($walletOwner));               
