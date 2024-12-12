@@ -3,7 +3,7 @@
 A **API TOKENHIVEN** foi desenvolvida para facilitar a criação de moedas virtuais, pontos transferíveis ou outros tipos de marcadores quantitativos. Com esta API, você pode:
 
 - Criar uma carteira individual para cada usuário.
-- Permitir transferências de valores entre carteiras de forma prática e segura.
+- Permitir transferências de valores entre carteiras de forma prática.
 
 ---
 
@@ -15,7 +15,7 @@ A **API TOKENHIVEN** foi desenvolvida para facilitar a criação de moedas virtu
 
 Endpoint: [https://tokenhiven.hendersongomes.tech/api/v1/walletsowner](https://tokenhiven.hendersongomes.tech/api/v1/walletsowner)
 
-Descrição: Este endpoint cria um usuário.
+Descrição: Este endpoint cria um usuário e a carteira associado a ele.
 
 #### Exemplo de Requisição
 
