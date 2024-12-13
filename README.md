@@ -211,7 +211,7 @@ Cotent-Type: application/json
 
 
 
-### Exibir usuário
+### Exibir Usuário Pelo Id
 
 `[GET] - /api/v1/walletowner/{usuario_id}`
 
