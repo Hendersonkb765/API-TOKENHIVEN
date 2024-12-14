@@ -38,7 +38,6 @@ Content-Type: application/json
         "id": 2,
         "name": "John Doe",
         "email": "john.doe@example.com",
-        "walletBalance": null,
         "createdAt": "11/12/2024 22:36:54",
         "updatedAt": "11/12/2024 22:36:54"
     }
@@ -64,7 +63,6 @@ Cotent-Type: application/json
             "id": 2,
             "name": "John Doe",
             "email": "john.doe@example.com",
-            "walletBalance": null,
             "createdAt": "11/12/2024 22:36:54",
             "updatedAt": "11/12/2024 22:36:54"
         },
@@ -72,7 +70,6 @@ Cotent-Type: application/json
             "id": 3,
             "name": "Izaq Silva",
             "email": "Izzak23@example.com",
-            "walletBalance": null,
             "createdAt": "12/12/2024 00:05:49",
             "updatedAt": "12/12/2024 00:05:49"
         }
@@ -100,7 +97,6 @@ Content-Type: application/json
         "id": 2,
         "name": "John Doe",
         "email": "john.doe@example.com",
-        "walletBalance": null,
         "createdAt": "11/12/2024 22:36:54",
         "updatedAt": "11/12/2024 22:36:54"
     }
@@ -133,7 +129,6 @@ Content-Type: application/json
         "id": 2,
         "name": "Izaq Silva",
         "email": "john.doe@example.com",
-        "walletBalance": null,
         "createdAt": "11/12/2024 22:36:54",
         "updatedAt": "14/12/2024 04:56:57"
     }
@@ -161,13 +156,13 @@ Content-Type: application/json
 
 ## Carteira
 
-### Exibir todos os usuários 
+### Exibir todas as carteiras 
 
 `[GET] - /api/v1/wallet`
 
 Endpoint: https://tokenhiven.hendersongomes.tech/api/v1/wallet
 
-Descrição: Este endpoint cria uma carteira para o usuario
+Descrição: Este endpoint exibi todas as carteiras.
 
 #### Exemplo de Resposta
 ```json
@@ -188,3 +183,33 @@ Content-Type: application/json
             "amount": 9049
         }
 }
+```
+
+### Criar Carteira
+
+Endpoint: https://tokenhiven.hendersongomes.tech/api/v1/wallet
+
+Descrição: Este endpoint cria uma carteira para o usuario.
+
+#### Exemplo de Requisição
+```json
+Content-Type: application/json
+
+{
+    "ownerId":11
+}
+```
+#### Exemplo de Resposta
+```json
+Content-Type: application/json
+
+{
+    "message": "Wallet created successfully",
+    "status": 201,
+    "data": {
+        "id": 1,
+        "walletAddress": "$2y$12$37vVZ8GTYZWZ9gwLUIiNNurmStI4Ntzks6MT6j2Q5iCNSKoXyvCIS",
+        "amount": 0
+    }
+}
+```
