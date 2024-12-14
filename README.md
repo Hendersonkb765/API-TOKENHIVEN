@@ -46,7 +46,7 @@ Content-Type: application/json
 ```
 ### Exibir todos os usuários
 
-`[GET] - /api/v1/walletowner/{usuario_id}`
+`[GET] - /api/v1/walletowner`
 
 Endpoint: https://tokenhiven.hendersongomes.tech/api/v1/walletsowner
 
