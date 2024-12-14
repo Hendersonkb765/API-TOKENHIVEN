@@ -106,6 +106,39 @@ Content-Type: application/json
     }
 }
 ```
+### Atualizar Usuário
+`[PUT] - /api/v1/walletowner/{user_id}`
+Endpoint: https://tokenhiven.hendersongomes.tech/api/v1/walletsowner/{usuario_id}
+
+Descrição: Este endpoint atualiza um usuário.
+
+#### Exemplo de Requisição
+
+```json
+Content-Type: application/json
+
+{
+    "name": "João Souza"
+}
+```
+
+#### Exemplo de Reposta
+```json
+Content-Type: application/json
+
+{
+    "message": "User updated successfully",
+    "status": 200,
+    "data": {
+        "id": 2,
+        "name": "Izaq Silva",
+        "email": "john.doe@example.com",
+        "walletBalance": null,
+        "createdAt": "11/12/2024 22:36:54",
+        "updatedAt": "14/12/2024 04:56:57"
+    }
+}
+```
 
 ### Deletar Usuário
 
@@ -125,3 +158,33 @@ Content-Type: application/json
     "data": []
 }
 ```
+
+## Carteira
+
+### Exibir todos os usuários 
+
+`[GET] - /api/v1/wallet`
+
+Endpoint: https://tokenhiven.hendersongomes.tech/api/v1/wallet
+
+Descrição: Este endpoint cria uma carteira para o usuario
+
+#### Exemplo de Resposta
+```json
+Content-Type: application/json
+
+{
+    "message": "ok",
+    "status": 200,
+    "data": [
+        {
+            "id": 1,
+            "walletAddress": "186760d7228ab09c611606fdcfc64432c25e0e8feccf1f1b9ee674ae87e9ab76",
+            "amount": 1936
+        },
+        {
+            "id": 2,
+            "walletAddress": "c39edff21af83de9db028cc294bdd5631ae642c914c6eddca7193f54edf3d1d4",
+            "amount": 9049
+        }
+}
