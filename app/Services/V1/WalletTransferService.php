@@ -20,9 +20,7 @@ class WalletTransferService extends TransactionHistoryService{
         
         (new BaseRepository(new HistoricTransfer(),$userId))->create([
             'from_wallet_id' => $from->id,
-            'from_wallet_owner_name' => $from->owner->name,
             'to_wallet_id' => $to->id,
-            'to_wallet_owner_name' => $to->owner->name,
             'amount' => $amount,
             'system_manager_id' => $userId
         ]);
