@@ -11,9 +11,22 @@ A **API TOKENHIVEN** foi desenvolvida para facilitar a criação de moedas virtu
 
 ### Criar Carteira
 
+`[POST] - /api/v1/wallet`
+
 Endpoint: https://tokenhiven.hendersongomes.tech/api/v1/wallets
 
 Descrição: Este endpoint cria uma carteira para o usuario.
+
+#### Exemplo de Requisição
+```json
+Content-Type: application/json
+
+{
+    "from":"8050540c7ecdcccf3f1b2e94f888cfa35197fcc5ea2c36865c1d767379c6e2fd",
+    "to":"$2y$12$hjxeaRSZg.XZW3wbW2d8Nua4nQB2dsqGVim.hEsxFLA9kWykh664a", 
+    "amount":21
+}
+```
 
 #### Exemplo de Resposta
 ```json
@@ -31,7 +44,7 @@ Content-Type: application/json
 ```
 
 ### Exibir todas as carteiras 
-
+ 
 `[GET] - /api/v1/wallet`
 
 Endpoint: https://tokenhiven.hendersongomes.tech/api/v1/wallets
@@ -90,9 +103,71 @@ Content-Type: application/json
 
 ## Transferências
 
-### Exibir Todas as Transferências 
+### Fazer Transferência
 
 `[POST] - /api/v1/wallet-transfer`
+
+Endpoint: https://tokenhiven.hendersongomes.tech/api/v1/wallet-transfer
+
+Descrição: Este endpoint exibi todos os históricos.
+
+#### Exemplo de Requisição
+```json
+Content-Type: application/json
+
+{
+    "message": "Validation error",
+    "status": 422,
+    "errors": {
+        "from": [
+            "O campo from selecionado é inválido.",
+            "Wallet not found"
+        ],
+        "to": [
+            "O campo to selecionado é inválido."
+        ]
+    },
+    "data": []
+}
+```
+
+#### Exemplo de Resposta
+```json
+Content-Type: application/json
+
+{
+    "message": "ok",
+    "status": 200,
+    "data": {
+        "transferHistory": [
+            {
+                "amount": 4193,
+                "sendBy": {
+                    "id": 1,
+                    "Address": "48433dbb90f995328e7bb23fc11f7d499d4c94aeb8a73f51ef178fae8e07119d"
+                },
+                "receivedBy": {
+                    "id": 6,
+                    "Address": "bcd212f5fd155ba7e782983fa9b0bd1b9fdb50f6b7e8dbd6daeb5cee19bf2a94"
+                }
+            },
+            {
+                "amount": 8300,
+                "sendBy": {
+                    "id": 2,
+                    "Address": "8050540c7ecdcccf3f1b2e94f888cfa35197fcc5ea2c36865c1d767379c6e2fd"
+                },
+                "receivedBy": {
+                    "id": 9,
+                    "Address": "71639fa5fe416bfbf29e0bbe21981033bc2e582783a826c15739783c6d78630d"
+                }
+            },
+}
+```
+
+### Exibir Todas as Transferências 
+
+`[GET] - /api/v1/wallet-transfer`
 
 Endpoint: https://tokenhiven.hendersongomes.tech/api/v1/wallet-transfer
 
@@ -132,9 +207,9 @@ Content-Type: application/json
 }
 ```
 
-### Exibir Hitóricode transfêrencia Pelo ID 
+### Exibir Hitórico de Transfêrencia Pelo ID 
 
-`[GET] - /api/v1/wallet-transfer`
+`[GET] - /api/v1/wallet-transfer/{historic_id}`
 
 Endpoint: https://tokenhiven.hendersongomes.tech/api/v1/wallet-transfer/{historic_id}
 
@@ -216,64 +291,6 @@ Content-Type: application/json
 }
 ```
 
-### Fazer Transferência
 
-`[POST] - /api/v1/wallet-transfer`
 
-Endpoint: https://tokenhiven.hendersongomes.tech/api/v1/wallet-transfer
-
-Descrição: Este endpoint exibi todos os históricos.
-
-#### Exemplo de Resposta
-```json
-Content-Type: application/json
-
-{
-    "message": "ok",
-    "status": 200,
-    "data": {
-        "transferHistory": [
-            {
-                "amount": 4193,
-                "sendBy": {
-                    "id": 1,
-                    "Address": "48433dbb90f995328e7bb23fc11f7d499d4c94aeb8a73f51ef178fae8e07119d"
-                },
-                "receivedBy": {
-                    "id": 6,
-                    "Address": "bcd212f5fd155ba7e782983fa9b0bd1b9fdb50f6b7e8dbd6daeb5cee19bf2a94"
-                }
-            },
-            {
-                "amount": 8300,
-                "sendBy": {
-                    "id": 2,
-                    "Address": "8050540c7ecdcccf3f1b2e94f888cfa35197fcc5ea2c36865c1d767379c6e2fd"
-                },
-                "receivedBy": {
-                    "id": 9,
-                    "Address": "71639fa5fe416bfbf29e0bbe21981033bc2e582783a826c15739783c6d78630d"
-                }
-            },
-}
-```
-#### Exemplo de Requisição
-```json
-Content-Type: application/json
-
-{
-    "message": "Validation error",
-    "status": 422,
-    "errors": {
-        "from": [
-            "O campo from selecionado é inválido.",
-            "Wallet not found"
-        ],
-        "to": [
-            "O campo to selecionado é inválido."
-        ]
-    },
-    "data": []
-}
-```
 
