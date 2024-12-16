@@ -42,14 +42,16 @@ class WalletTransferRequest extends FormRequest
             if(empty($fromWallet)){
                 $validator->errors()->add('from','Wallet not found');
             }
-            if(empty($toWallet)){
+            else if(empty($toWallet)){
                 $validator->errors()->add('to','Wallet not found');
             }
-
-            $walletAmount = Wallet::select('amount')->where('wallet_address',$this->input('from'))->first()->amount;          
-            $walletAmount < $this->input('amount') ? $validator->errors()->add('amount', 'Insufficient balance') : null;
-            
-            $this->input('from') == $this->input('to') ? $validator->errors()->add('to', 'Cannot transfer to the same wallet') : null;
+            else{
+                $walletAmount = Wallet::select('amount')->where('wallet_address',$this->input('from'))->first()->amount;          
+                $walletAmount < $this->input('amount') ? $validator->errors()->add('amount', 'Insufficient balance') : null;
+                
+                $this->input('from') == $this->input('to') ? $validator->errors()->add('to', 'Cannot transfer to the same wallet') : null;
+            }
+          
         });
     }
 
