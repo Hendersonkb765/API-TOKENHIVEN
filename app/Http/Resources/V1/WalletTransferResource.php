@@ -24,7 +24,7 @@ class WalletTransferResource extends JsonResource
             ],
             'receivedBy'=>[
                             'id'=> $receovedByWallet->id,
-                            'Address'=> $this->byWallet->wallet_address    
+                            'Address'=> $this->toWallet->wallet_address    
             ]
         ];
     }
