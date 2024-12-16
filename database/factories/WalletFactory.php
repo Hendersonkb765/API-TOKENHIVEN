@@ -19,7 +19,6 @@ class WalletFactory extends Factory
         return [
             'wallet_address' => $this->faker->sha256,
             'amount' => $this->faker->numberBetween(100, 10000),
-            'owner_id' => \App\Models\WalletOwner::inRandomOrder()->first()->id,
             'system_manager_id' =>1,
         ];
     }

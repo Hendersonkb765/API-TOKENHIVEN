@@ -19,14 +19,12 @@ class WalletTransferResource extends JsonResource
         return [
             'amount'=> $this->amount,
             'sendBy'=> [
-                            'name' =>$sendByWallet->owner->name,
-                            'email' => $sendByWallet->owner->email,
-                            'walletAddress'=> $sendByWallet->wallet_address,                            
+                            'id'=> $this->id,
+                            'Address'=> $this->fromWallet->wallet_address                     
             ],
             'receivedBy'=>[
-                            'name'=>$receovedByWallet->owner->name,
-                            'email'=> $receovedByWallet->owner->email,
-                            'walletAddress'=> $receovedByWallet->wallet_address
+                            'id'=> $receovedByWallet->id,
+                            'Address'=> $this->byWallet->wallet_address    
             ]
         ];
     }

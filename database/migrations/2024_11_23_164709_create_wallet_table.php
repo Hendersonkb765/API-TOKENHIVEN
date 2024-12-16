@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('wallet_address')->unique();
             $table->float('amount');
-            $table->foreignId('owner_id')->constrained('wallet_owners')->onDelete('cascade')->onUpdate('cascade');
+            //$table->foreignId('owner_id')->constrained('wallet_owners')->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('system_manager_id')->constrained('users')->onDelete('cascade')->onUpdate('cascade');
             $table->softDeletes();
             $table->timestamps();

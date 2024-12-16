@@ -8,7 +8,7 @@ use App\Http\Controllers\Api\V1\WalletTransferController;
 Route::prefix('v1')->group(function(){
   
     //Route::get('/wallets',[WalletOwnerController::class,'index']);
-    Route::apiResource('walletsowner', WalletOwnerController::class)->middleware('auth:sanctum');
+    // Route::apiResource('walletsowner', WalletOwnerController::class)->middleware('auth:sanctum');
 
     Route::apiResource('wallets', WalletController::class)->middleware('auth:sanctum');
   

@@ -14,7 +14,6 @@ use Illuminate\Support\Facades\Log;
 use App\Filters\WalletFilter;
 use App\Services\V1\TokenUserResolverService;
 use App\Repositories\BaseRepository;
-
 class WalletController extends Controller
 {
     use HttpResponses;
@@ -45,18 +44,14 @@ class WalletController extends Controller
     }
 
 
-    public function store(StoreWalletRequest $request)
+    public function store(Request $request)
     {
         try{
-            $validated = $request->validated();
             $userId = (new TokenUserResolverService())->getUser($request)->id;
-            if(Wallet::where('owner_id',$request['owner_id'])->exists()){
-                return $this->error('There is already a linked wallet',400);
-            }
+
             $wallet = (new BaseRepository(new Wallet,$userId))->create([
                 'wallet_address'=>Hash::make(now()),
                 'amount'=>0,
-                'owner_id'=>$request['ownerId'],
             ]);
            
             return $this->success('Wallet created successfully',201,new WalletResource($wallet));

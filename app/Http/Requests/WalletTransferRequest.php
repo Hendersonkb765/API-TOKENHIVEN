@@ -30,7 +30,6 @@ class WalletTransferRequest extends FormRequest
             'from'=> 'required|exists:wallets,wallet_address',
             'to'=> 'required|exists:wallets,wallet_address',
             'amount'=> 'required|numeric|min:1',
-
         ];
     }
 

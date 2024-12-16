@@ -28,7 +28,7 @@ class WalletTest extends TestCase
         $user = User::factory()->create();    
         $response = $this->withHeaders([
             'Authorization' => 'Bearer '.$user->createToken('my-app-token')->plainTextToken,
-        ])->post('/api/v1/wallets',['ownerId'=>3]);
+        ])->post('/api/v1/wallets');
 
         $response->assertStatus(201);
         $response->assertJsonStructure([

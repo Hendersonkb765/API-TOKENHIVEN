@@ -15,9 +15,7 @@ return new class extends Migration
             $table->id();
             $table->float('amount');
             $table->unsignedBigInteger('from_wallet_id')->nullable();
-            $table->string('from_wallet_owner_name');
             $table->unsignedBigInteger('to_wallet_id')->nullable();
-            $table->string('to_wallet_owner_name');
             $table->foreignId('system_manager_id')->constrained('users');
             $table->timestamps();
         });
