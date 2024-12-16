@@ -207,7 +207,7 @@ Content-Type: application/json
 }
 ```
 
-### Exibir Hitórico de Transfêrencia Pelo ID 
+### Exibir Transfêrencia Pelo ID 
 
 `[GET] - /api/v1/wallet-transfer/{historic_id}`
 
@@ -249,47 +249,6 @@ Content-Type: application/json
 }
 ```
 
-### Exibir Todas as Carteiras 
-
-`[POST] - /api/v1/wallet-transfer`
-
-Endpoint: https://tokenhiven.hendersongomes.tech/api/v1/wallet-transfer
-
-Descrição: Este endpoint exibi todos os históricos.
-
-#### Exemplo de Resposta
-```json
-Content-Type: application/json
-
-{
-    "message": "ok",
-    "status": 200,
-    "data": {
-        "transferHistory": [
-            {
-                "amount": 4193,
-                "sendBy": {
-                    "id": 1,
-                    "Address": "48433dbb90f995328e7bb23fc11f7d499d4c94aeb8a73f51ef178fae8e07119d"
-                },
-                "receivedBy": {
-                    "id": 6,
-                    "Address": "bcd212f5fd155ba7e782983fa9b0bd1b9fdb50f6b7e8dbd6daeb5cee19bf2a94"
-                }
-            },
-            {
-                "amount": 8300,
-                "sendBy": {
-                    "id": 2,
-                    "Address": "8050540c7ecdcccf3f1b2e94f888cfa35197fcc5ea2c36865c1d767379c6e2fd"
-                },
-                "receivedBy": {
-                    "id": 9,
-                    "Address": "71639fa5fe416bfbf29e0bbe21981033bc2e582783a826c15739783c6d78630d"
-                }
-            },
-}
-```
 
 
 
