@@ -257,5 +257,23 @@ Content-Type: application/json
             },
 }
 ```
+#### Exemplo de Requisição
+```json
+Content-Type: application/json
 
+{
+    "message": "Validation error",
+    "status": 422,
+    "errors": {
+        "from": [
+            "O campo from selecionado é inválido.",
+            "Wallet not found"
+        ],
+        "to": [
+            "O campo to selecionado é inválido."
+        ]
+    },
+    "data": []
+}
+```
 
