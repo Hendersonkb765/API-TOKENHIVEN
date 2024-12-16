@@ -51,7 +51,7 @@ class WalletController extends Controller
 
             $wallet = (new BaseRepository(new Wallet,$userId))->create([
                 'wallet_address'=>Hash::make(now()),
-                'amount'=>0,
+                'amount'=>$request->amount,
             ]);
            
             return $this->success('Wallet created successfully',201,new WalletResource($wallet));
